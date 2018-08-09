@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/core/styles'
 import logo from './ErinNichtingMobile.jpg'
 import Avatar from '@material-ui/core/Avatar'
 import SwipeableViews from 'react-swipeable-views'
+import ContactForm from '../../views/contact/contact'
 
 function TabContainer(props) {
   return (
@@ -35,6 +36,7 @@ class NavBar extends React.Component {
   handleChange = (event, value) => {
     this.setState({ value })
   }
+
   handleChangeIndex = index => {
     this.setState({ value: index })
   }
@@ -65,11 +67,16 @@ class NavBar extends React.Component {
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={this.state.value}
           onChangeIndex={this.handleChangeIndex}
+          animateHeight="true"
         >
           {<TabContainer dir={theme.direction}>Home</TabContainer>}
           {<TabContainer dir={theme.direction}>About Me</TabContainer>}
           {<TabContainer dir={theme.direction}>Resume</TabContainer>}
-          {<TabContainer dir={theme.direction}>Contact</TabContainer>}
+          {
+            <TabContainer dir={theme.direction}>
+              <ContactForm />
+            </TabContainer>
+          }
         </SwipeableViews>
       </div>
     )

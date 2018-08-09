@@ -7,8 +7,16 @@ import PhoneIcon from '@material-ui/icons/Phone'
 const BottomNavBar = () => {
   return (
     <BottomNavigation showLabels>
-      <BottomNavigationAction label="Email" icon={<EmailIcon />} />
-      <BottomNavigationAction label="Call" icon={<PhoneIcon />} />
+      <BottomNavigationAction
+        label="Email"
+        icon={<EmailIcon />}
+        href="mailto:erin.nichting@gmail.com"
+      />
+      <BottomNavigationAction
+        label="Call"
+        icon={<PhoneIcon />}
+        href="tel:4147040638"
+      />
     </BottomNavigation>
   )
 }
