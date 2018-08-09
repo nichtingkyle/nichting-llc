@@ -12,17 +12,17 @@ const styles = theme => ({
     flexWrap: 'wrap'
   },
   textField: {
-    marginBottom: '2rem',
-    marginRight: '2rem',
+    marginBottom: '2em',
+    marginRight: '2em',
     width: 250
   },
   textArea: {
-    marginBottom: '2rem',
+    marginBottom: '2em',
     width: 532
   }
 })
 
-const ContactForm = props => {
+const ContactView = props => {
   const { classes } = props
   return (
     <div>
@@ -30,7 +30,7 @@ const ContactForm = props => {
       <p>
         If you are an individual or legal professional in need of a forensic
         consultation, please call Dr. Nichting at{' '}
-        <a href="tel:4147040638">(414) 704-0638</a>, or email at&#160;
+        <a href="tel:4147040638">414-704-0638</a>, or email at&#160;
         <a href="mailto:erin.nichting@gmail.com">erin.nichting@gmail.com</a>.
       </p>
       <p>
@@ -77,7 +77,7 @@ const ContactForm = props => {
           className={classes.textArea}
         />
       </div>
-      <div class="formGroup">
+      <div className="formGroup">
         <Button
           variant="contained"
           color="secondary"
@@ -90,4 +90,4 @@ const ContactForm = props => {
   )
 }
 
-export default withStyles(styles)(ContactForm)
+export default withStyles(styles)(ContactView)

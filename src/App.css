@@ -17,11 +17,3 @@ header {
   height: auto;
   margin-right: 30px;
 }
-
-.formGroup {
-  display: flex;
-}
-
-.formGroup > div {
-  margin-right: 40px;
-}

@@ -8,7 +8,10 @@ import { withStyles } from '@material-ui/core/styles'
 import logo from './ErinNichtingMobile.jpg'
 import Avatar from '@material-ui/core/Avatar'
 import SwipeableViews from 'react-swipeable-views'
-import ContactForm from '../../views/contact/contact'
+import ContactView from '../../views/contact/contact'
+import HomeView from '../../views/home/home'
+import AboutMeView from '../../views/about-me/aboutme'
+import ResumeView from '../../views/resume/resume'
 
 function TabContainer(props) {
   return (
@@ -67,14 +70,26 @@ class NavBar extends React.Component {
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={this.state.value}
           onChangeIndex={this.handleChangeIndex}
-          animateHeight="true"
+          animateHeight
         >
-          {<TabContainer dir={theme.direction}>Home</TabContainer>}
-          {<TabContainer dir={theme.direction}>About Me</TabContainer>}
-          {<TabContainer dir={theme.direction}>Resume</TabContainer>}
           {
             <TabContainer dir={theme.direction}>
-              <ContactForm />
+              <HomeView />
+            </TabContainer>
+          }
+          {
+            <TabContainer dir={theme.direction}>
+              <AboutMeView />
+            </TabContainer>
+          }
+          {
+            <TabContainer dir={theme.direction}>
+              <ResumeView />
+            </TabContainer>
+          }
+          {
+            <TabContainer dir={theme.direction}>
+              <ContactView />
             </TabContainer>
           }
         </SwipeableViews>
