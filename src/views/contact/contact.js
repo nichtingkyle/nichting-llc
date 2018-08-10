@@ -1,26 +1,25 @@
 import React from 'react'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
-import { withStyles } from '@material-ui/core/styles'
+import { Formik } from 'formik'
+import * as Yup from 'yup'
+import ContactForm from '../../components/contact-form/contact-form'
 
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit
-  },
-  formGroup: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  textField: {
-    marginBottom: '2em',
-    marginRight: '2em',
-    width: 250
-  },
-  textArea: {
-    marginBottom: '2em',
-    width: 532
-  }
+const validationSchema = Yup.object().shape({
+  firstName: Yup.string().required('First name is required'),
+  lastName: Yup.string().required('Last name is required'),
+  email: Yup.string()
+    .email('E-mail is not valid')
+    .required('E-mail is required'),
+  subject: Yup.string().required('Password is required'),
+  message: Yup.string().required('Message is required')
 })
+
+const handleSubmit = (values, { setSubmitting }) => {
+  setTimeout(() => {
+    // TODO: send email here
+    alert('submitted')
+    setSubmitting(false)
+  }, 1000)
+}
 
 const ContactView = props => {
   const { classes } = props
@@ -37,57 +36,13 @@ const ContactView = props => {
         You can also fill out the form below and I will get back to you as soon
         as possible.
       </p>
-      <div className={classes.formGroup}>
-        <TextField
-          id="firstName"
-          label="First Name"
-          required
-          className={classes.textField}
-        />
-        <TextField
-          id="lastName"
-          label="Last Name"
-          required
-          className={classes.textField}
-        />
-      </div>
-      <div className="formGroup">
-        <TextField
-          id="email"
-          label="Email Address"
-          required
-          className={classes.textField}
-        />
-      </div>
-      <div className="formGroup">
-        <TextField
-          id="subject"
-          label="Subject"
-          required
-          className={classes.textField}
-        />
-      </div>
-      <div className="formGroup">
-        <TextField
-          id="message"
-          label="Message"
-          required
-          multiline
-          rows="8"
-          className={classes.textArea}
-        />
-      </div>
-      <div className="formGroup">
-        <Button
-          variant="contained"
-          color="secondary"
-          className={classes.button}
-        >
-          Submit
-        </Button>
-      </div>
+      <Formik
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+        render={ContactForm}
+      />
     </div>
   )
 }
 
-export default withStyles(styles)(ContactView)
+export default ContactView
