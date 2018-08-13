@@ -47,4 +47,4 @@ const BottomNavBar = props => {
   )
 }
 
-export default withStyles(styles)(BottomNavBar)
+export default withStyles(styles, { withTheme: true })(BottomNavBar)

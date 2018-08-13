@@ -21,10 +21,6 @@ function TabContainer(props) {
   )
 }
 
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired
-}
-
 const styles = theme => ({
   root: {
     flexGrow: 1,
