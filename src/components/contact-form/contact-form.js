@@ -22,98 +22,103 @@ const styles = theme => ({
   }
 })
 
-const ContactForm = props => {
-  const { isSubmitting, handleChange, handleSubmit, classes, touched } = props
+const validationSchema = Yup.object().shape({
+  firstName: Yup.string().required('First name is required'),
+  lastName: Yup.string().required('Last name is required'),
+  email: Yup.string()
+    .email('E-mail is not valid')
+    .required('E-mail is required'),
+  subject: Yup.string().required('Password is required'),
+  message: Yup.string().required('Message is required')
+})
 
-  return (
-    <Formik
-      validationSchema={Yup.object().shape({
-        firstName: Yup.string().required('First name is required'),
-        lastName: Yup.string().required('Last name is required'),
-        email: Yup.string()
-          .email('E-mail is not valid')
-          .required('E-mail is required'),
-        subject: Yup.string().required('Password is required'),
-        message: Yup.string().required('Message is required')
-      })}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          // TODO: send email here
-          alert('submitted')
-          setSubmitting(false)
-        }, 1000)
-      }}
-      render={({ errors }) => (
-        <Form>
-          <div className={classes.formGroup}>
-            <TextField
-              id="firstName"
-              label="First Name"
-              required
-              className={classes.textField}
-            />
-            {errors.lastName &&
-              touched.lastName && (
-                <div className="invalid-feedback">{errors.lastName}</div>
-              )}
-            <TextField
-              id="lastName"
-              label="Last Name"
-              required
-              className={classes.textField}
-            />
-            {errors.lastName &&
-              touched.lastName && (
-                <div className="invalid-feedback">{errors.lastName}</div>
-              )}
-          </div>
-          <div className={classes.formGroup}>
-            <TextField
-              id="email"
-              label="Email Address"
-              required
-              className={classes.textField}
-            />
-            {errors.email &&
-              touched.email && (
-                <div className="invalid-feedback">{errors.email}</div>
-              )}
-          </div>
-          <div className={classes.formGroup}>
-            <TextField
-              id="subject"
-              label="Subject"
-              required
-              className={classes.textField}
-            />
-            {errors.subject &&
-              touched.subject && (
-                <div className="invalid-feedback">{errors.subject}</div>
-              )}
-          </div>
-          <div className={classes.formGroup}>
-            <TextField
-              id="message"
-              label="Message"
-              required
-              multiline
-              rows="8"
-              className={classes.textArea}
-            />
-            {errors.message &&
-              touched.message && (
-                <div className="invalid-feedback">{errors.message}</div>
-              )}
-          </div>
-          <div className={classes.formGroup}>
-            <Button variant="contained" color="secondary" type="submit">
-              Submit
-            </Button>
-          </div>
-        </Form>
-      )}
-    />
-  )
+const handleSubmit = (values, { setSubmitting }) => {
+  setTimeout(() => {
+    // TODO: send email here
+    alert('submitted')
+    setSubmitting(false)
+  }, 1000)
+}
+
+class ContactForm extends React.Component {
+  render() {
+    const { classes } = this.props
+    return (
+      <Formik
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+        render={({ errors, values, handleChange, handleSubmit }) => (
+          <Form>
+            <div className={classes.formGroup}>
+              <TextField
+                id="firstName"
+                label="First Name"
+                className={classes.textField}
+                error={errors.firstName}
+                value={values.firstName}
+                onChange={handleChange}
+                onSubmit={handleSubmit}
+                helperText={errors.firstName}
+              />
+              <TextField
+                id="lastName"
+                label="Last Name"
+                className={classes.textField}
+                error={errors.lastName}
+                value={values.lastName}
+                onChange={handleChange}
+                onSubmit={handleSubmit}
+                helperText={errors.lastName}
+              />
+            </div>
+            <div className={classes.formGroup}>
+              <TextField
+                id="email"
+                label="Email Address"
+                className={classes.textField}
+                error={errors.email}
+                value={values.email}
+                onChange={handleChange}
+                onSubmit={handleSubmit}
+                helperText={errors.email}
+              />
+            </div>
+            <div className={classes.formGroup}>
+              <TextField
+                id="subject"
+                label="Subject"
+                className={classes.textField}
+                error={errors.subject}
+                value={values.subject}
+                onChange={handleChange}
+                onSubmit={handleSubmit}
+                helperText={errors.subject}
+              />
+            </div>
+            <div className={classes.formGroup}>
+              <TextField
+                id="message"
+                label="Message"
+                multiline
+                rows="8"
+                className={classes.textArea}
+                error={errors.message}
+                value={values.message}
+                onChange={handleChange}
+                onSubmit={handleSubmit}
+                helperText={errors.message}
+              />
+            </div>
+            <div className={classes.formGroup}>
+              <Button variant="contained" color="secondary" type="submit">
+                Submit
+              </Button>
+            </div>
+          </Form>
+        )}
+      />
+    )
+  }
 }
 
 export default withStyles(styles, { withTheme: true })(ContactForm)

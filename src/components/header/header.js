@@ -66,7 +66,7 @@ class NavBar extends React.Component {
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={this.state.value}
           onChangeIndex={this.handleChangeIndex}
-          animateHeight
+          // animateHeight
         >
           {
             <TabContainer dir={theme.direction}>
